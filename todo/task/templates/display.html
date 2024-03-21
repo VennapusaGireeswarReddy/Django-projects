@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tasks</title>
+    <style>
+        button{
+            background-color:transparent;
+            margin-left: 10px; 
+            border-radius: 10px;
+            padding: 10px;
+            width: 90px;
+           
+        }
+        button a{
+            color: black; 
+            font-weight: bold; 
+            font-size: 15px;
+        }
+        button:hover{
+            background-color:orange;  
+        }
+        button a:hover{
+            color:black;
+        }
+        .paste-button { 
+            position: relative;
+            display: flex;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          }
+          
+        .button {
+            background-color: transparent;
+            color: #212121;
+            padding: 10px 15px;
+            font-size: 15px;
+            font-weight: bold;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+          
+        .dropdown-content {
+            display: none;
+            font-size: 13px;
+            position: absolute;
+            z-index: 1;
+            min-width: 200px;
+            background-color: #212121;
+            border: 2px solid #4CAF50;
+            border-radius: 0px 15px 15px 15px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          }
+          
+        .dropdown-content a {
+            color: #4CAF50;
+            padding: 8px 10px;
+            text-decoration: none;
+            display: block;
+            transition: 0.1s;
+          }
+          
+        .dropdown-content a:hover {
+            background-color: white;
+            color: #212121;
+          }
+          
+        .dropdown-content a:focus {
+            background-color: #212121;
+            color: #4CAF50;
+          }
+          
+        .dropdown-content #top:hover {
+            border-radius: 0px 13px 0px 0px;
+          }
+          
+        .dropdown-content #bottom:hover {
+            border-radius: 0px 0px 13px 13px;
+          }
+          
+        .paste-button:hover button {
+            border-radius: 15px 15px 0px 0px;
+          }
+          
+        .paste-button:hover .dropdown-content {
+            display: block;
+          }
+        .btn{
+            background-color:transparent;
+            margin-left: 10px; 
+            border-radius: 10px;
+            padding: 10px;
+            width: 90px;
+           
+        }
+        .btn a{
+            color: black; 
+            font-weight: bold; 
+            font-size: 15px;
+        }
+        .btn:hover{
+            background-color:blue;  
+        }
+        .btn1{
+            background-color:transparent;
+            margin-left: 10px; 
+            border-radius: 10px;
+            padding: 10px;
+            width: 90px;
+           
+        }
+        .btn1 a{
+            color: black; 
+            font-weight: bold; 
+            font-size: 15px;
+        }
+        .btn1:hover{
+            background-color:red;  
+        }
+        .btn2{
+            background-color:transparent;
+            margin-left: 10px; 
+            border-radius: 10px;
+            padding: 10px;
+            width: 90px;
+           
+        }
+        .btn2 a{
+            color: black; 
+            font-weight: bold; 
+            font-size: 15px;
+        }
+        .btn2:hover{
+            background-color:lawngreen;  
+        }
+        body {
+            background: rgb(201,200,223);
+            background: linear-gradient(90deg, rgba(201,200,223,1) 0%, rgba(41,98,93,1) 44%);
+        }
+        .hi:hover{
+            background-color:yellow;  
+        }
+    </style>
+</head>
+<body style="text-align:center">
+
+   {% block content %} 
+        <form method='post' action={% url "search" %}>
+            {% csrf_token %}
+         <label for="search"> search task by name</label>
+         <input type="text" id='search' name='search' placeholder="search here...."> 
+          <button>search</button><br><br>
+        </form>
+        <form method="post"action="{% url "due" %}">
+            {% csrf_token %}
+            <label for="due">search task by date</label>
+            <input type="date" name="search" id="due">
+            <button>search</button>
+        </form>
+    
+    <div>
+        <table width=100%>
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>Todo items</th>
+                <th>Status</th>
+                <th>Due</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% comment %} <form method="POST">
+                    {% csrf_token %}
+                
+                        <input type="hidden" name="display" value='true'>
+                        <input type="submit" value="display" ><br><br> 
+                </form> {% endcomment %}
+                <div class="paste-button">
+                    <button class="button">Display &nbsp; ▼</button>
+                    <div class="dropdown-content" style="position:relative;top:50px;right:90px"> 
+                      <a id="top" href="{% url "finishedtasks" %}">finishedtasks</a>
+                      <a id="middle" href="{% url "display" %}">notfinished</a>
+                    </div>
+                  </div>
+                {% for record in records %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <td>{{ record.task }}</td>
+                    <td>{{ record.status }} {% if record.status == "Not started" %}<button><a href="{% url 'inprogress' record.id %}">Started</a></button></td>{% endif %} 
+                    <td>{{ record.due }}</td>
+                    <td><button class="btn"><a href="{% url "edit" record.id %}">edit</a></button></td>
+                    <td><button class="btn1"><a href="{% url "delete" record.id %}">delete</a></button></td>
+                    <td><button class="btn2"><a href="{% url "finished" record.id %}">Finished</a></button></td>
+
+                </tr>
+                {% endfor %}
+                {% comment %} {% for task in tasks %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <td>{{ task.task }}</td>
+                    <td>{{ task.status }} <button><a href="{% url 'inprogress' task.id %}">Started</a></button></td> 
+                    <td>{{ task.due }}</td>
+                    <td><button class="btn"><a href="{% url "edit" task.id %}">edit</a></button></td>
+                    <td><button class="btn1"><a href="{% url "delete" task.id %}">delete</a></button></td>
+                    <td><button class="btn2"><a href="{% url "finished" task.id %}">Finished</a></button></td>
+
+                </tr>
+                {% endfor %} {% endcomment %}
+               
+                
+            </tbody>
+            </table>
+        </div>  
+         
+        {% include "messages.html" %}
+        <button class="hi" style="width:auto"><a href="{% url "finishedtasks" %}" style="text-decoration:none">finishedtasks</a></button>
+
+        <a href="{% url "task" %}"><button style="text-align:leftend">Back?</button></a>
+   <a href="{% url "finishedtasks" %}"><button style="text-align:end">Next?</button></a>
+
+   {% endblock content %}
+   
+</body>
+</html>
+
