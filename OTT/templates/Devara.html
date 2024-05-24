@@ -1,0 +1,13 @@
+{% extends "movies.html" %}
+
+{% block content %}
+    <br><br>
+
+    {% for record in records %}
+        <h1>{{ record.name }}</h1>
+        <img src="/media/{{ record.image }} "><p>{{ record.cast }}</p>
+        <h4>{{ record.description }}</h4>
+        <video src="/media/{{ record.video }}" controls ></video>
+    {% endfor %}
+    
+{% endblock content %}

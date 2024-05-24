@@ -1,0 +1,35 @@
+{% extends "homepage.html" %}
+
+
+{% block content %}
+
+        {% comment %} <img src="https://www.filmibeat.com/fanimg/movie/21716/ambajipeta-marriage-band-photos-images-2023041213766500.jpg" alt="abajiraopeta marriage band" height=300px; 
+        width=200px;> 
+
+        <img src="https://i.ytimg.com/vi/3OcsfLUhAZc/maxresdefault.jpg" alt="12th Fail" height=300px; 
+        width=200px;>
+
+        <img src="https://indiaglitz-media.s3.amazonaws.com/telugu/home/baby-movie-review-1.jpg" alt="Baby" height=300px; 
+        width=200px;>
+
+        <a href="salaar.mp4"><img src="https://jobshankar.co.in/wp-content/uploads/2023/06/Salaar-Movie-2023.jpg" alt="12th Fail"  height=300px; 
+        width=200px;> <br>
+
+        <img src="https://i.ytimg.com/vi/N_7F6VyV0zI/maxresdefault.jpg" alt="12th Fail" height=300px; 
+        width=250px;>
+
+        <img src="https://www.cinefry.co.in/wp-content/uploads/2023/10/Irugapatru.jpg" alt="12th Fail" height=300px; 
+        width=250px;> {% endcomment %}
+
+    <br><br>
+
+    {% for record in records %}
+        <h1>{{ record.name }}</h1>
+        {% comment %} <h4>{{ record.description }}</h4> {% endcomment %}
+        <a href="{% url "devara" record.id %}"><img src="/media/{{ record.image }}" style="height: 300px;wiidth: 250px;"></a>
+        
+        {% comment %} <video src="/media/{{ record.video }}" controls ></video>     {% endcomment %}
+    {% endfor %}
+
+{% endblock content %}
+

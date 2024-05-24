@@ -1,0 +1,8 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+    {% for record in records %}
+        <h1>{{ record.name }}</h1>
+        <a href="{% url "display" record.id %}"><img src="/media/{{ record.image }}" style="height: 300px;wiidth: 250px;"></a>
+    {% endfor %}
+{% endblock content %}
