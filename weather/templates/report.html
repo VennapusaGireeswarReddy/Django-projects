@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="text-align:center">
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="city" id="city"  required>
+        <button>submit</button>
+    </form>
+        {% if data %}
+        <h1>Today weather details of :{{data.city}}</h1>
+        <h1> country code: {{ data.countrycode }}</h1>
+        <h2>coordinates: {{ data.coordinate }}</h2>
+        <h2>temp:{{ data.temp }}</h2>
+        <h2>pressure:{{ data.pressure }}</h2>
+        <h2>humidity: {{ data.humidity }}</h2>
+        {% endif %}
+    
+</body>
+</html>
+<style>
+    body{
+        background: rgb(36,41,36);
+        background: linear-gradient(90deg, rgba(36,41,36,1) 0%, rgba(29,253,216,0.9922093837535014) 96%);
+        
+    }
+</style>
