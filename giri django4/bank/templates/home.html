@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+{% load static %}
+<body class="t1">
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo"><a href="#"></a>
+            </div>
+            <img src="{% static "swasthik-bank-high-resolution-logo-white.png" %}" alt="Todo Logo">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}
+    <div class="t2">
+        <h1>Welcome to Swasthik Bank ATM</h1>
+        <h3>Your Friendly Bank</h3>
+        <div class="buttons-container">
+            <div class="buttons-column left-buttons">
+                <a href="{% url 'changepin' %}"><button class="t4">Pin Change</button></a>
+                <a href="{% url 'details' %}"><button class="t4">Account Details</button></a>
+                <a href="{% url 'transaction' %}"><button class="t4">Mini Statement</button></a>
+            </div>
+            <div class="buttons-column right-buttons">
+                <a href="{% url 'balance' %}"><button class="t4">Balance Enquiry</button></a>
+                <a href="{% url 'withdrawl' %}"><button class="t4">Withdrawal</button></a>
+                <a href="{% url 'deposit' %}"><button class="t4">Deposit</button></a>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+    
+    {% include "messages.html" %}
+    
+</body>
+</html>
+
+
+<style ='text/style'>
+    body {
+        position: relative;
+        height: 100vh;
+        margin: 0;
+        background: black;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: white;
+    }
+    
+    
+    .navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 15px;
+        background: none;
+    }
+    
+    .logo a {
+        font-size: 35px;
+        font-weight: 600;
+        color: black;
+        text-decoration: none;
+    }
+    
+    .navdiv {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    li {
+        margin-right: 90px;
+    }
+    
+    li a {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    
+    .t2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    
+    .buttons-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .buttons-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    button {
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding: 10px;
+        width: 150px;
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    
+    button:hover {
+        background-color: black;
+        box-shadow: 0px 0px 10px white, 0px 0px 20px white, 0px 0px 30px white;
+    }
+    
+    button a {
+        color: white;
+        text-decoration: none;
+    }
+    
+    button a:hover {
+        color: green;
+    }
+    .logo {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+    .logo {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+    
+    img{
+        height:150px;
+        width: 200px;
+    }
+   </style>
